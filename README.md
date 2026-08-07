@@ -92,3 +92,20 @@ iTransformer achieved the best overall performance among evaluated models in bot
 DLinear also demonstrated competitive performance despite its simple structure, showing that effective forecasting does not always require highly complex architectures.
 
 SHAP analysis was further applied to investigate how different models utilize historical load information and weather variables.
+
+---
+
+## Acknowledgement
+
+This project is based on the following open-source projects:
+
+- **LTSF-Linear**  
+  https://github.com/cure-lab/LTSF-Linear
+
+- **Time-Series-Library**  
+  https://github.com/thuml/Time-Series-Library
+
+We sincerely thank the authors for providing open-source implementations of time-series forecasting models.
+
+The original repositories provide the model implementations.  
+This project focuses on electricity load forecasting under extreme weather conditions, including dataset construction, experimental design, model comparison, and explainable AI analysis.
