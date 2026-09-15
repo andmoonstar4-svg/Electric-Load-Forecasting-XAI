@@ -1,0 +1,19 @@
+# Paper tables 3-1 / 3-2: normal-weather comparison on dataset 1 (change the
+# data config to configs/data/tetuan.yaml for table 3-2).
+#
+# Batch size 48 per the paper's "Autoformer 参数如下" block; it is stated once here
+# for every model rather than left to an argparse default.
+experiment: normal-weather
+
+training:
+  epochs: 10
+  batch_size: 48
+  learning_rate: 1.0e-4
+  patience: 3
+  loss: mse
+  seed: 2021
+  device: auto
+  repeats: 1        # set > 1 to get mean +- std instead of a single point estimate
+
+run:
+  output_dir: runs

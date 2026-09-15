@@ -1,0 +1,38 @@
+# Paper S5 / figures 5-1..5-4: SHAP attribution.
+#
+# Every value here addresses a specific defect of the original routine:
+#
+#   n_background: 100   (was 5)  — precision of E[f]
+#   n_eval:       50    (was 3)  — number of explained windows
+#   nsamples:     auto  (was 100) — 4 x n_features, floored at 2000; for a
+#                                   (168, 7) window that is 4704 coalitions
+#                                   instead of 100 for a 1176-feature game
+#   resolution:   variable        — 7 scores instead of averaging the lag axis
+#                                   away without saying so
+#   target_steps: [0]             — forecast hour 1 only. Use "all" to explain the
+#                                   whole 24-hour horizon, or [0, 6, 12, 18, 23]
+#                                   for a spread across the day.
+#
+# `models.metrics.json` records `model_normalises_windows`; when true (iTransformer,
+# DLinear) perturbing an input also changes the window statistics used by the
+# instance normaliser, so an attribution is an average marginal contribution and
+# not a statement about the raw input. The additivity residual is reported by
+# every XAI run so this cannot pass unnoticed.
+xai:
+  enabled: true
+  method: auto          # 'tree' for RandomForest, 'kernel' for the neural models
+  n_background: 100
+  n_eval: 50
+  nsamples: auto
+  resolution: variable
+  target_steps: [0]
+  check_additivity: true
+
+experiment: xai
+
+training:
+  epochs: 10
+  batch_size: 8
+  patience: 3
+  loss: mse
+  seed: 2021

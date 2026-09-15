@@ -1,13 +1,53 @@
+# --- Python ---
 __pycache__/
-*.pyc
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.eggs/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
 
-.idea/
-.vscode/
+# --- Raw data: never version-controlled ---
+# The Belgian load series is redistributable only by Elia, ERA5 carries the
+# Copernicus licence, and Tetuan is CC BY 4.0. Ship the fetch/clean code and the
+# provenance record (docs/provenance.md) instead of the data itself.
+data/
+*.csv
+*.parquet
+*.xlsx
+*.xls
+*.feather
+*.h5
+*.hdf5
+*.nc
+!configs/**/*.csv
 
+# --- Generated artefacts ---
+runs/
+results/
+figures/
 checkpoints/
 logs/
+*.npy
+*.npz
+*.joblib
+*.pt
+*.pth
+*.ckpt
 
-data/
+# --- Vendored upstream, fetched on demand (opt in by not ignoring it) ---
+.third_party_clone/
 
+# --- Editors / OS ---
+.idea/
+.vscode/
 .DS_Store
 Thumbs.db
+*~
+~$*

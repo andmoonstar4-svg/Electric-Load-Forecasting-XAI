@@ -1,0 +1,7 @@
+# DLinear — the strong linear baseline (paper S3.1).
+# moving_avg = 25 is the decomposition kernel; the paper reuses Autoformer's
+# kernel size, so 25 is the faithful choice.
+model:
+  name: DLinear
+  params:
+    moving_avg: 25

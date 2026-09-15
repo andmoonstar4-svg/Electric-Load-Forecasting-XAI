@@ -1,0 +1,28 @@
+# Paper table 4-1: extreme-weather task on dataset 1.
+#
+# Two things change relative to the normal-weather config, and both are recorded
+# here rather than hidden in a shell script:
+#   * the extreme-weather subset (S4.1) — each extreme date plus the 7 preceding
+#     days, 8689 rows in the paper's build;
+#   * batch_size 8, as the paper states for the extreme dataset.
+data:
+  extreme:
+    enabled: true
+    mode: events_only
+    context_days: 7
+    t2m_min_c: 0.0
+    t2m_max_c: 35.0
+    tp_min_m: 0.005
+    tp_unit: m
+    u10_min_ms: 15.0
+
+experiment: extreme-weather
+
+training:
+  epochs: 10
+  batch_size: 8
+  learning_rate: 1.0e-4
+  patience: 3
+  loss: mse
+  seed: 2021
+  device: auto

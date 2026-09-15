@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Two jobs on purpose: the core layer must stay importable without torch,
+        # so the package cannot quietly grow a hard deep-learning dependency.
+        deps: ["core", "all"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install (core only)
+        if: matrix.deps == 'core'
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+          pip install pytest
+
+      - name: Install (core + torch + xai)
+        if: matrix.deps == 'all'
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[torch,xai,dev]"
+          # CPU-only torch keeps the job small
+          pip install --index-url https://download.pytorch.org/whl/cpu torch
+
+      - name: Run tests
+        run: pytest -q
+
+      - name: Check that no raw data entered version control
+        run: |
+          if git ls-files | grep -Ei '\.(csv|parquet|xlsx?|feather|h5|hdf5|nc)$' | grep -v '^configs/'; then
+            echo "::error::data files must not be committed (see docs/provenance.md)"
+            exit 1
+          fi
+          echo "no data files tracked"
