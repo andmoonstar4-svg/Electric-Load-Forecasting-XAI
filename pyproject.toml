@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "elxai"
+version = "0.1.0"
+description = "Electricity load forecasting under normal and extreme weather, with built-in explainability (iTransformer / DLinear / Autoformer / Random Forest)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "andmoonstar4-svg" }]
+keywords = ["load-forecasting", "time-series", "xai", "shap", "extreme-weather"]
+
+# Core: only what the data/analysis layer needs. Torch and shap are optional
+# extras so the pipeline is importable (and testable) without a GPU stack.
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "scikit-learn>=1.6",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+# The upstream Time-Series-Library models (iTransformer / DLinear / Autoformer)
+torch = [
+    "torch>=2.3",
+    "einops>=0.8",
+]
+# SHAP-based attribution layer
+xai = [
+    "shap>=0.45",
+    "matplotlib>=3.8",
+]
+dev = [
+    "pytest>=8.0",
+]
+
+[project.scripts]
+elxai = "elxai.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+elxai = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

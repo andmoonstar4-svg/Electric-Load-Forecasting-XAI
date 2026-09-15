@@ -1,0 +1,36 @@
+{
+  "Time-Series-Library": {
+    "url": "https://github.com/thuml/Time-Series-Library",
+    "licence": "MIT",
+    "vendored_files": [
+      "models/iTransformer.py",
+      "models/DLinear.py",
+      "models/Autoformer.py",
+      "models/Transformer.py",
+      "layers/AutoCorrelation.py",
+      "layers/Autoformer_EncDec.py",
+      "layers/Embed.py",
+      "layers/SelfAttention_Family.py",
+      "layers/StandardNorm.py",
+      "layers/Transformer_EncDec.py",
+      "utils/metrics.py",
+      "utils/tools.py",
+      "utils/timefeatures.py",
+      "utils/masking.py",
+      "utils/dtw_metric.py",
+      "utils/augmentation.py"
+    ],
+    "source_session_commit": "df1b4ca7bfbf1d6416e71d52fee3f00c1f37c0aa",
+    "local_variant_note": "The vendored copy came from the author's working tree, which differs from thuml/Time-Series-Library upstream in three files: data_provider/data_loader.py, exp/exp_long_term_forecasting.py (added the original shap_analysis routine) and a normalisation fit call. None of those files are vendored here; the adapters in elxai/models/torch_adapter.py replace them. Re-vendor from upstream with scripts/fetch_third_party.py to get a pristine reference.",
+    "papers": [
+      "LIU Y, HU T, ZHANG H, et al. iTransformer: Inverted transformers are effective for time series forecasting[C]//ICLR, 2024.",
+      "ZENG A, CHEN M, ZHANG L, et al. Are transformers effective for time series forecasting?[C]//AAAI, 2023, 37(9): 11121-11128.",
+      "WU H, XU J, WANG J, et al. Autoformer: Decomposition transformers with auto-correlation for long-term series forecasting[C]//NeurIPS, 2021, 34."
+    ]
+  },
+  "LTSF-Linear": {
+    "url": "https://github.com/cure-lab/LTSF-Linear",
+    "licence": "see upstream",
+    "note": "DLinear is available from both upstream projects; the Time-Series-Library copy is used, so this tree is intentionally empty and only kept as a placeholder for the reference."
+  }
+}

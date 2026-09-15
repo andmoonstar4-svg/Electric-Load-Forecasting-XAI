@@ -1,0 +1,18 @@
+# Chronological split, shared by every experiment (paper S2.1: 70/10/20).
+#
+# purge = number of hours dropped before the validation block and before the test
+# block. 0 means "use seq_len + pred_len - 1", the smallest value that guarantees
+# no training window overlaps the next split. The original code base purged
+# nothing, so its last training targets were validation-period observations.
+split:
+  train: 0.7
+  val: 0.1
+  test: 0.2
+  purge: 0
+
+# The paper reports standardised MSE/MAE, so the transform is part of the result,
+# not an implementation detail. Applied per channel, fitted on the training rows
+# only, and written to runs/<id>/scaler.json for every run.
+scaling:
+  method: standard
+  per_column: true

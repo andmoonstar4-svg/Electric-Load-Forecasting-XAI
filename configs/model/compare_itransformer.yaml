@@ -1,0 +1,13 @@
+# iTransformer
+model:
+  name: iTransformer
+  params:
+    d_model: 32
+    d_ff: 32
+    e_layers: 2
+    n_heads: 8
+    dropout: 0.1
+    factor: 1
+    activation: gelu
+    embed: timeF
+    freq: h

@@ -1,0 +1,27 @@
+# Paper S6: loss-function ablation on the extreme-weather task.
+#
+# `training.loss` is part of the run fingerprint, so the three rows of table 6-1
+# land in three different run directories. In the original code they shared one
+# `setting` string and overwrote each other.
+#
+# exp_loss_beta = 2 (the paper's base beta)
+# exp_loss_alpha = 4 (the exponent actually used by the code that produced the
+#                    published table; the prose's "2^(2|e|)" form is alpha = 1)
+data:
+  extreme:
+    enabled: true
+    mode: events_only
+    context_days: 7
+
+experiment: loss-ablation-extreme
+
+training:
+  epochs: 10
+  batch_size: 8
+  learning_rate: 1.0e-4
+  patience: 3
+  loss: exp
+  exp_loss_beta: 2.0
+  exp_loss_alpha: 4.0
+  seed: 2021
+  device: auto

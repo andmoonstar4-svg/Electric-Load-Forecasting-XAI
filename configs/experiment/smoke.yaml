@@ -1,0 +1,27 @@
+# Fast end-to-end smoke configuration for CI and local verification.
+#
+# This is NOT a paper configuration: epochs and estimators are reduced so the
+# whole pipeline (build -> train -> evaluate -> attribute) finishes in minutes.
+# It exists so that "does the pipeline run end to end?" can be answered without a
+# GPU and without the real datasets.
+experiment: smoke
+
+training:
+  epochs: 1
+  batch_size: 64
+  patience: 1
+  loss: mse
+
+xai:
+  enabled: true
+  method: auto
+  n_background: 20
+  n_eval: 4
+  nsamples: 600          # small on purpose; 'auto' derives 4 x n_features
+  resolution: variable
+  target_steps: [0]
+  check_additivity: true
+
+model:
+  params:
+    n_estimators: 20     # Random Forest only
